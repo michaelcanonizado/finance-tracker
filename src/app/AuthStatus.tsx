@@ -13,18 +13,18 @@ const AuthStatus = ({ children }: { children: React.ReactNode }) => {
 
 	if (pathname === '/') {
 		return (
-			<div className="">
-				<LandingNavbar className="bg-blue-200" />
+			<div className={``}>
+				<LandingNavbar className="" />
 				{children}
 			</div>
 		);
 	}
 
 	return (
-		<div className="flex">
-			<DashboardSidebar className="bg-red-200 min-h-screen" />
+		<div className={`flex`}>
+			<DashboardSidebar className=" min-h-screen" />
 			<div className="grow">
-				<DashboardNavbar className="bg-blue-200" />
+				<DashboardNavbar className="dark:bg-red-400" />
 				{children}
 			</div>
 		</div>
