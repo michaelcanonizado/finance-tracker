@@ -8,12 +8,18 @@ import LandingNavbar from '@/components/navigation/navbar/LandingNavbar';
 import DashboardNavbar from '@/components/navigation/navbar/DashboardNavbar';
 import DashboardSidebar from '@/components/navigation/sidebar/DashboardSidebar';
 
-const AuthStatus = ({ children }: { children: React.ReactNode }) => {
+const AuthStatus = ({
+	children,
+	shadcnTheme,
+}: {
+	children: React.ReactNode;
+	shadcnTheme: string;
+}) => {
 	const pathname = usePathname();
 
 	if (pathname === '/') {
 		return (
-			<div className={``}>
+			<div className={`${shadcnTheme}`}>
 				<LandingNavbar className="" />
 				{children}
 			</div>
@@ -21,10 +27,10 @@ const AuthStatus = ({ children }: { children: React.ReactNode }) => {
 	}
 
 	return (
-		<div className={`flex`}>
+		<div className={`flex ${shadcnTheme}`}>
 			<DashboardSidebar className=" min-h-screen" />
 			<div className="grow">
-				<DashboardNavbar className="dark:bg-red-400" />
+				<DashboardNavbar className="" />
 				{children}
 			</div>
 		</div>

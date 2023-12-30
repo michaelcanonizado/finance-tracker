@@ -15,7 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<AuthStatus>{children}</AuthStatus>
+				<AuthStatus shadcnTheme="dark bg-background text-foreground">
+					{children}
+				</AuthStatus>
 			</body>
 		</html>
 	);
