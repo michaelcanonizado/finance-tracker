@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { X, Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 import DashboardSidebar from "../sidebar/DashboardSidebar";
 
