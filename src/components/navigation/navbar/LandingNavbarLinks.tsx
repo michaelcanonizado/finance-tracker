@@ -19,12 +19,6 @@ const LandingNavbarLinks = ({ className }: { className?: string }) => {
       <li className="">Link</li>
       <li className="">Link</li>
       <li className="">Link</li>
-      <li className="">Link</li>
-      <li className="">Link</li>
-      <li className="">Link</li>
-      <li className="">Link</li>
-      <li className="">Link</li>
-      <li className="">Link</li>
     </ul>
   );
 };
