@@ -1,6 +1,10 @@
 import React from "react";
 
+import { getData } from "@/lib/getSheetsData";
+
 const Home = () => {
+  const data = getData();
+
   return (
     <div className="min-h-screen">
       USER DASHBOARD
