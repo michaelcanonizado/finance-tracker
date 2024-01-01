@@ -1,15 +1,6 @@
 import { google } from "googleapis";
 
-const url =
-  "https://docs.google.com/spreadsheets/d/126uZPcPz9o0v8oVL-2Zr3inP2l9w2yajc-NGPIesiZw/edit?usp=sharing";
-
-interface IExpenses {
-  timestamp: string;
-  data: string;
-  amount: number;
-  category: string;
-  description: string;
-}
+import { IExpense, IExpenses } from "@/interfaces/IExpenses";
 
 export const getData = async () => {
   const spreadsheetId = process.env.SHEET_ID;
@@ -54,24 +45,17 @@ export const getData = async () => {
   return formatGoogleSheetData(rows.data.values!);
 };
 
-// interface IExpenses {
-//     timestamp: string;
-//     data: string;
-//     amount: number;
-//     category: string;
-//     description: string;
-//   }
-
 const formatGoogleSheetData = (rawData: Array<Array<string>>) => {
-  const formattedData: IExpenses[] = rawData.map((row) => {
+  rawData.shift();
+
+  const formattedData: IExpense[] = rawData.map((row, index) => {
     return {
       timestamp: row[0],
-      data: row[1],
-      amount: parseFloat(row[2]),
+      date: row[1],
       category: row[3],
       description: row[4],
+      amount: parseFloat(row[2]),
     };
   });
-
   return formattedData;
 };

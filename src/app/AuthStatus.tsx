@@ -29,7 +29,7 @@ const AuthStatus = ({
   return (
     <div className={`flex ${shadcnTheme}`}>
       <DashboardSidebar className="hidden min-w-64 xl:flex" />
-      <div className="items-stretch">
+      <div className="grow">
         <DashboardNavbar className="" />
         {children}
       </div>
