@@ -3,6 +3,14 @@ import { google } from "googleapis";
 const url =
   "https://docs.google.com/spreadsheets/d/126uZPcPz9o0v8oVL-2Zr3inP2l9w2yajc-NGPIesiZw/edit?usp=sharing";
 
+interface IExpenses {
+  timestamp: string;
+  data: string;
+  amount: number;
+  category: string;
+  description: string;
+}
+
 export const getData = async () => {
   const spreadsheetId = process.env.SHEET_ID;
   const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -43,5 +51,27 @@ export const getData = async () => {
     range: "TEST",
   });
 
-  console.log(rows.data);
+  return formatGoogleSheetData(rows.data.values!);
+};
+
+// interface IExpenses {
+//     timestamp: string;
+//     data: string;
+//     amount: number;
+//     category: string;
+//     description: string;
+//   }
+
+const formatGoogleSheetData = (rawData: Array<Array<string>>) => {
+  const formattedData: IExpenses[] = rawData.map((row) => {
+    return {
+      timestamp: row[0],
+      data: row[1],
+      amount: parseFloat(row[2]),
+      category: row[3],
+      description: row[4],
+    };
+  });
+
+  return formattedData;
 };

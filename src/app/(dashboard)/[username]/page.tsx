@@ -2,8 +2,10 @@ import React from "react";
 
 import { getData } from "@/lib/getSheetsData";
 
-const Home = () => {
-  const data = getData();
+const Home = async () => {
+  const data = await getData();
+
+  console.log(data);
 
   return (
     <div className="min-h-screen">
