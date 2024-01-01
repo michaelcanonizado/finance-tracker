@@ -2,7 +2,7 @@ import React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import { LayoutPanelLeft } from "lucide-react";
+import { LayoutPanelLeft, Receipt, PiggyBank, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -10,11 +10,49 @@ import Link from "next/link";
 const DashboardSidebar = ({ className }: { className?: string }) => {
   const user = "user";
 
+  const linkIconClasses = "mr-2 h-6 w-6";
+
   const sidebarRoutes = [
-    { title: "Accounts", href: `/${user}/accounts` },
-    { title: "Payments", href: `/${user}/payments` },
-    { title: "Balances", href: `/${user}/balances` },
-    { title: "Reports", href: `/${user}/reports` },
+    {
+      title: "Main",
+      routes: [
+        {
+          title: "Accounts",
+          href: `/${user}/accounts`,
+          icon: <ArrowRight className={linkIconClasses} />,
+        },
+        {
+          title: "Payments",
+          href: `/${user}/payments`,
+          icon: <ArrowRight className={linkIconClasses} />,
+        },
+        {
+          title: "Balances",
+          href: `/${user}/balances`,
+          icon: <ArrowRight className={linkIconClasses} />,
+        },
+        {
+          title: "Reports",
+          href: `/${user}/reports`,
+          icon: <ArrowRight className={linkIconClasses} />,
+        },
+      ],
+    },
+    {
+      title: "Tables",
+      routes: [
+        {
+          title: "Incomes",
+          href: `/${user}/incomes`,
+          icon: <PiggyBank className={linkIconClasses} />,
+        },
+        {
+          title: "Expenses",
+          href: `/${user}/expenses`,
+          icon: <Receipt className={linkIconClasses} />,
+        },
+      ],
+    },
   ];
 
   return (
@@ -31,21 +69,27 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
             <LayoutPanelLeft className="mr-2 h-6 w-6" /> Home
           </Button>
         </Link>
-        <div className="flex flex-col gap-2">
-          <div className="">
-            <span className="">Main Menu</span>
-          </div>
-          {sidebarRoutes.map((route, index) => {
-            return (
-              <Link href={route.href} key={index}>
-                <Button className="flex w-full justify-start bg-background text-foreground hover:text-background">
-                  <LayoutPanelLeft className="mr-2 h-6 w-6" />
-                  {route.title}
-                </Button>
-              </Link>
-            );
-          })}
-        </div>
+
+        {sidebarRoutes.map((type, index) => {
+          return (
+            <div className="flex flex-col gap-2" key={index}>
+              <div className="">
+                <span className="">{type.title}</span>
+              </div>{" "}
+              {type.routes.map((route, index) => {
+                return (
+                  <Link href={route.href} key={index}>
+                    <Button className="flex w-full justify-start bg-background text-foreground hover:text-background">
+                      {/* <LayoutPanelLeft className="mr-2 h-6 w-6" /> */}
+                      {route.icon}
+                      {route.title}
+                    </Button>
+                  </Link>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </aside>
   );

@@ -45,9 +45,7 @@ const DashboardTable = async ({ data }: { data: IExpense[] }) => {
             </TableCell>
             <TableCell>{row.date}</TableCell>
             <TableCell>{row.category}</TableCell>
-            <TableCell className="scrolling-touch hide-scrollbar max-w-[200px] overflow-y-scroll whitespace-nowrap">
-              {row.description}
-            </TableCell>
+            <TableCell className="">{row.description}</TableCell>
             <TableCell className="text-right font-semibold">
               {row.amount.toFixed(2)} PHP
             </TableCell>
