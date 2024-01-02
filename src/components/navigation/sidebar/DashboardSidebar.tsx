@@ -42,8 +42,8 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
       title: "Tables",
       routes: [
         {
-          title: "Incomes",
-          href: `/${user}/incomes`,
+          title: "Income",
+          href: `/${user}/income`,
           icon: <PiggyBank className={linkIconClasses} />,
         },
         {

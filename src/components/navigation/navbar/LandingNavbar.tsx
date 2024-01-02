@@ -4,7 +4,6 @@ import { twMerge } from "tailwind-merge";
 
 import { X, Menu } from "lucide-react";
 
-import DashboardSidebar from "../sidebar/DashboardSidebar";
 import LandingNavbarLinks from "./LandingNavbarLinks";
 
 const LandingNavbar = ({ className }: { className?: string }) => {

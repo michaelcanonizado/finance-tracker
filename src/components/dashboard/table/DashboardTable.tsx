@@ -5,7 +5,6 @@ import { IExpense } from "@/interfaces/IExpenses";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -13,18 +12,20 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const DashboardTable = async ({ data }: { data: IExpense[] }) => {
-  console.log(data);
-
+const DashboardTable = async ({
+  className,
+  containerClasses,
+  data,
+}: {
+  className?: string;
+  containerClasses?: string;
+  data: IExpense[];
+}) => {
   return (
-    <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          {/* <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead> */}
+    // containerClass are classes applied to the parent/wrapper container of the table: <div><table></table> </div>
+    <Table containerClass="relative grow max-h-[75vh]" className="">
+      <TableHeader className="sticky top-0 bg-background">
+        <TableRow className="">
           {Object.keys(data[0]).map((header, index, arr) => {
             return (
               <TableHead
@@ -37,7 +38,7 @@ const DashboardTable = async ({ data }: { data: IExpense[] }) => {
           })}
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="">
         {data.map((row, index) => (
           <TableRow key={index}>
             <TableCell className="text-xm text-muted-foreground">
@@ -52,7 +53,8 @@ const DashboardTable = async ({ data }: { data: IExpense[] }) => {
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
+
+      <TableFooter className="sticky bottom-0 bg-muted">
         <TableRow>
           <TableCell colSpan={4}>Total</TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
