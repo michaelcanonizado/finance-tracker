@@ -1,8 +1,8 @@
 import { google } from "googleapis";
 
-import { IExpense, IExpenses } from "@/interfaces/IExpenses";
+import { GoogleSheets, IExpense } from "@/interfaces/IMain";
 
-export const getData = async () => {
+export const getData = async (sheetName: GoogleSheets) => {
   const spreadsheetId = process.env.SHEET_ID;
   const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
@@ -21,25 +21,11 @@ export const getData = async () => {
     spreadsheetId: spreadsheetId,
   });
 
-  //   console.log("appending...");
-  //   const appendRes = await googleSheets.spreadsheets.values.append({
-  //     auth,
-  //     spreadsheetId,
-  //     range: "TEST",
-  //     valueInputOption: "USER_ENTERED",
-  //     insertDataOption: "INSERT_ROWS",
-  //     // responseValueRenderOption: "FORMATTED_VALUE",
-  //     body: {
-  //       values: [["test", "test", "test", "test", "test"]],
-  //     },
-  //   });
-  //   console.log("appending complete...");
-
   // Get rows
   const rows = await googleSheets.spreadsheets.values.get({
     auth: auth,
     spreadsheetId: spreadsheetId,
-    range: "TEST",
+    range: sheetName,
   });
 
   return formatGoogleSheetData(rows.data.values!);
@@ -48,14 +34,31 @@ export const getData = async () => {
 const formatGoogleSheetData = (rawData: Array<Array<string>>) => {
   rawData.shift();
 
+  // Formats date from 1/2/2024 to Tues, 1/2/2024
+  const dateOptions = {
+    weekday: "short",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  };
+
   const formattedData: IExpense[] = rawData.map((row, index) => {
+    const date = new Date(row[1]);
+
+    // Shortens the year further from 2024 to 24 (final date format: 'Tues, 1/2,24')
+    let shortYear = date.getFullYear().toString().slice(-2);
+
     return {
       timestamp: row[0],
-      date: row[1],
+      date: date
+        .toLocaleString("en-US", dateOptions)
+        .replace(/\d{4}/, shortYear),
       category: row[3],
       description: row[4],
       amount: parseFloat(row[2]),
     };
   });
-  return formattedData;
+
+  // Reverse the array to show the recent data first
+  return formattedData.reverse();
 };

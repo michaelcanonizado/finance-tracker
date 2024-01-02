@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IExpense } from "@/interfaces/IExpenses";
+import { IExpense } from "@/interfaces/IMain";
 
 import {
   Table,

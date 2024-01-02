@@ -1,6 +1,6 @@
-export interface IExpenses {
-  headers: string[];
-  data: IExpense[];
+export enum GoogleSheets {
+  income = "INCOME DATABASE",
+  expenses = "EXPENSES DATABASE",
 }
 
 export interface IExpense {

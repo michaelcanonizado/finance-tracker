@@ -2,10 +2,11 @@ import React from "react";
 
 import DashboardTable from "@/components/dashboard/table/DashboardTable";
 
+import { GoogleSheets } from "@/interfaces/IMain";
 import { getData } from "@/lib/getSheetsData";
 
-const Home = async () => {
-  const data = await getData();
+const Income = async () => {
+  const data = await getData(GoogleSheets.income);
 
   return (
     <div className="min-h-screen p-6">
@@ -22,4 +23,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default Income;
