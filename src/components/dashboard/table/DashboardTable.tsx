@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ICashFlow } from "@/types/main";
+import { GoogleSheets, ICashFlow } from "@/types/main";
 
 import {
   Table,
@@ -26,7 +26,10 @@ const DashboardTable = async ({
   return (
     // containerClass are classes applied to the parent/wrapper container of the table: <div><table></table> </div>
     <Table
-      containerClass={twMerge("relative grow max-h-[75vh]", containerClasses)}
+      containerClass={twMerge(
+        "relative grow max-h-[75vh] overflow-auto max-w-[90vw]",
+        containerClasses,
+      )}
       className={twMerge("", className)}
     >
       <TableHeader className="sticky top-0  bg-background">
@@ -35,7 +38,7 @@ const DashboardTable = async ({
             return (
               <TableHead
                 key={index}
-                className={index === arr.length - 1 ? "text-right" : ""}
+                className={`${index === arr.length - 1 ? "text-right" : ""}`}
               >
                 {header.toUpperCase()}
               </TableHead>
@@ -49,12 +52,12 @@ const DashboardTable = async ({
             <TableCell className="text-xm text-muted-foreground">
               {row.timestamp}
             </TableCell>
-            <TableCell>{row.date}</TableCell>
+            <TableCell className="">{row.date}</TableCell>
             <TableCell>{row.category}</TableCell>
             <TableCell className="">{row.description}</TableCell>
 
             {/* Render the acoount column if in income page */}
-            {row.account ? (
+            {data.sheet === GoogleSheets.income ? (
               <TableCell className="">{row.account}</TableCell>
             ) : (
               ""
@@ -69,7 +72,9 @@ const DashboardTable = async ({
 
       <TableFooter className="sticky bottom-0 bg-muted">
         <TableRow>
-          <TableCell colSpan={4}>Total</TableCell>
+          <TableCell colSpan={data.sheet === GoogleSheets.income ? 5 : 4}>
+            Total
+          </TableCell>
           <TableCell className="text-right">$2,500.00</TableCell>
         </TableRow>
       </TableFooter>
