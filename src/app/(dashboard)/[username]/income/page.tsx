@@ -2,7 +2,7 @@ import React from "react";
 
 import DashboardTable from "@/components/dashboard/table/DashboardTable";
 
-import { GoogleSheets } from "@/interfaces/IMain";
+import { GoogleSheets } from "@/types/main";
 import { getData } from "@/lib/getSheetsData";
 
 const Income = async () => {
