@@ -22,7 +22,6 @@ const DashboardTable = async ({
   containerClasses?: string;
   data: ICashFlow;
 }) => {
-  console.log(data);
   return (
     // containerClass are classes applied to the parent/wrapper container of the table: <div><table></table> </div>
     <Table
@@ -72,10 +71,12 @@ const DashboardTable = async ({
 
       <TableFooter className="sticky bottom-0 bg-muted">
         <TableRow>
-          <TableCell colSpan={data.sheet === GoogleSheets.income ? 5 : 4}>
+          <TableCell colSpan={data.sheet === GoogleSheets.income ? 4 : 3}>
             Total
           </TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
+          <TableCell className="text-right" colSpan={2}>
+            {data.total.toFixed(2)} PHP
+          </TableCell>
         </TableRow>
       </TableFooter>
     </Table>

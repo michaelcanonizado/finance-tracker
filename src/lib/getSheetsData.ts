@@ -28,9 +28,12 @@ export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
     range: sheetName,
   });
 
+  const formattedData = formatGoogleSheetData(rows.data.values!, sheetName);
+
   return {
     sheet: sheetName,
-    values: formatGoogleSheetData(rows.data.values!, sheetName),
+    values: formattedData.values,
+    total: formattedData.total,
   } as ICashFlow;
 };
 
@@ -59,11 +62,16 @@ const formatGoogleSheetData = (
   sheetName: GoogleSheets,
 ) => {
   rawData.shift();
+
   const formattedData = [];
+
+  // Total income/expenses accumulator of the values fetched
+  let totalAmount = 0;
 
   if (sheetName === GoogleSheets.income) {
     formattedData.push(
       ...rawData.map((row, index) => {
+        totalAmount += parseFloat(row[2]);
         return {
           timestamp: row[0],
           date: formatDate(row[1]),
@@ -74,11 +82,10 @@ const formatGoogleSheetData = (
         };
       }),
     );
-
-    return formattedData.reverse();
   } else if (sheetName === GoogleSheets.expenses) {
     formattedData.push(
       ...rawData.map((row, index) => {
+        totalAmount += parseFloat(row[2]);
         return {
           timestamp: row[0],
           date: formatDate(row[1]),
@@ -88,7 +95,7 @@ const formatGoogleSheetData = (
         };
       }),
     );
-
-    return formattedData.reverse();
   }
+
+  return { total: totalAmount, values: formattedData.reverse() };
 };
