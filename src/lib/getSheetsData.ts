@@ -1,33 +1,19 @@
-import { google } from "googleapis";
-
 import { GoogleSheets, ICashFlow } from "@/types/main";
 
+import { authenticateGoogleSheets } from "./authenticateGoogleSheets";
+
 export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
-  const spreadsheetId = process.env.SHEET_ID;
-  const keyFile = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  // Authenticate google sheets and get instances
+  const [googleSheets, auth, spreadsheetId] = await authenticateGoogleSheets();
 
-  const auth = new google.auth.GoogleAuth({
-    keyFile: keyFile,
-    scopes: "https://www.googleapis.com/auth/spreadsheets",
-  });
-
-  const client = await google.auth.getClient();
-
-  const googleSheets = google.sheets({ version: "v4", auth: client });
-
-  // Get metadata
-  const metadata = await googleSheets.spreadsheets.get({
-    auth: auth,
-    spreadsheetId: spreadsheetId,
-  });
-
-  // Get rows
+  // Get rows from the sheet
   const rows = await googleSheets.spreadsheets.values.get({
     auth: auth,
     spreadsheetId: spreadsheetId,
     range: sheetName,
   });
 
+  // Format the values fetched from the sheet
   const formattedData = formatGoogleSheetData(rows.data.values!, sheetName);
 
   return {
