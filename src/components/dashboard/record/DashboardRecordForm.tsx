@@ -63,23 +63,40 @@ const DashboardRecordForm = ({
 
   // Define zod Schema
   const formSchema = z.object({
-    amount: z.coerce.number({
-      invalid_type_error: "Please enter a valid amount.",
-    }),
+    amount: z.string().refine(
+      (input) => {
+        if (Number.isNaN(Number(input)) || parseFloat(input) < 0) {
+          return false;
+        }
+        return input;
+      },
+      { message: "Please enter a valid amount" },
+    ),
     account: z.enum(Accounts),
     date: z.date({
       required_error: "Please enter a valid date.",
     }),
     category: z.enum(ExpensesCategories),
     // Set description to be optional when variant is income (I personally wanted it to be optional).
-    description: variant === "income" ? z.string().optional() : z.string(),
+    description:
+      variant === "income"
+        ? z.string().optional()
+        : z.string().refine(
+            (input) => {
+              if (input.length <= 0) {
+                return false;
+              }
+              return input;
+            },
+            { message: "Required" },
+          ),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // Set description field's default values to empty string when variant is income (description needs to be undefined to trigger the required error when description is set to required).
-      description: variant === "income" ? "" : undefined,
+      amount: "",
+      description: "",
     },
   });
 
