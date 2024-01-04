@@ -5,6 +5,30 @@ export enum GoogleSheets {
   test = "TEST",
 }
 
+export const Accounts = [
+  "CASH",
+  "GCASH",
+  "PAYMAYA ",
+  "PAYPAL",
+  "BANK",
+] as const;
+export const IncomeCategories = [
+  "SALARY",
+  "ALLOWANCE",
+  "INVESTMENT",
+  "BUSINESS",
+  "OTHER",
+] as const;
+export const ExpensesCategories = [
+  "FOOD/DRINK",
+  "TRANSPORTATION",
+  "SHOPPING",
+  "CELLPHONE",
+  "HOUSING",
+  "EDUCATION",
+  "OTHER",
+] as const;
+
 export interface IExpenses {
   sheet: GoogleSheets;
 }
