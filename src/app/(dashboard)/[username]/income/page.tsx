@@ -9,7 +9,7 @@ const Income = async () => {
   const data = await getData(GoogleSheets.income);
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="mx-auto w-fit lg:px-6">
       <div className="mb-8">
         <div className="mb-1">
           <h1 className="text-4xl">Income</h1>
