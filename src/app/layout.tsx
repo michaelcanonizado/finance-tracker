@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <body className={inter.className}>
-        <AuthStatus shadcnTheme="dark bg-background text-foreground">
+        <AuthStatus shadcnTheme="bg-background text-foreground">
           {children}
         </AuthStatus>
       </body>

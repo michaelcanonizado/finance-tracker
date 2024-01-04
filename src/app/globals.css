@@ -11,7 +11,7 @@
 }
 
 @layer base {
-  :root {
+  :root[data-theme="light"] {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
 
@@ -43,7 +43,7 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  :root[data-theme="dark"] {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
