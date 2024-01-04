@@ -1,6 +1,6 @@
 import React from "react";
 
-import DashboardRecordForm from "@/components/dashboard/record/DashboardRecordForm";
+import DashboardRecordForm from "@/components/dashboard/track/DashboardRecordForm";
 
 const RecordIncome = () => {
   return (

@@ -41,16 +41,16 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
       ],
     },
     {
-      title: "Record",
+      title: "Track",
       routes: [
         {
           title: "Income",
-          href: `/${user}/record/income`,
+          href: `/${user}/track/income`,
           icon: <ListPlus className={linkIconClasses} />,
         },
         {
           title: "Expense",
-          href: `/${user}/record/expense`,
+          href: `/${user}/track/expense`,
           icon: <ListMinus className={linkIconClasses} />,
         },
       ],
