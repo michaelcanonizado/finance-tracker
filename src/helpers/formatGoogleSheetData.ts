@@ -1,5 +1,6 @@
 import { GoogleSheets } from "@/types/main";
 
+import { formatText } from "@/helpers/formatText";
 import { formatDate } from "@/helpers/formatDate";
 
 export const formatGoogleSheetData = (
@@ -18,11 +19,11 @@ export const formatGoogleSheetData = (
       ...rawData.map((row, index) => {
         totalAmount += parseFloat(row[2]);
         return {
-          timestamp: row[0],
+          timestamp: formatText(row[0]),
           date: formatDate(row[1]),
-          category: row[3],
-          description: row[4],
-          account: "CASH",
+          category: formatText(row[3]),
+          description: formatText(row[4]),
+          account: formatText(row[5]),
           amount: parseFloat(row[2]),
         };
       }),
@@ -32,10 +33,10 @@ export const formatGoogleSheetData = (
       ...rawData.map((row, index) => {
         totalAmount += parseFloat(row[2]);
         return {
-          timestamp: row[0],
+          timestamp: formatText(row[0]),
           date: formatDate(row[1]),
-          category: row[3],
-          description: row[4],
+          category: formatText(row[3]),
+          description: formatText(row[4]),
           amount: parseFloat(row[2]),
         };
       }),
