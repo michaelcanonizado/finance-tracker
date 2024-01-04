@@ -2,7 +2,14 @@ import React from "react";
 
 import { twMerge } from "tailwind-merge";
 
-import { LayoutPanelLeft, Receipt, PiggyBank, ArrowRight } from "lucide-react";
+import {
+  LayoutPanelLeft,
+  Receipt,
+  PiggyBank,
+  ArrowRight,
+  ListPlus,
+  ListMinus,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -17,11 +24,6 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
       title: "Main",
       routes: [
         {
-          title: "Accounts",
-          href: `/${user}/accounts`,
-          icon: <ArrowRight className={linkIconClasses} />,
-        },
-        {
           title: "Payments",
           href: `/${user}/payments`,
           icon: <ArrowRight className={linkIconClasses} />,
@@ -35,6 +37,21 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
           title: "Reports",
           href: `/${user}/reports`,
           icon: <ArrowRight className={linkIconClasses} />,
+        },
+      ],
+    },
+    {
+      title: "Record",
+      routes: [
+        {
+          title: "Income",
+          href: `/${user}/record/income`,
+          icon: <ListPlus className={linkIconClasses} />,
+        },
+        {
+          title: "Expense",
+          href: `/${user}/record/expense`,
+          icon: <ListMinus className={linkIconClasses} />,
         },
       ],
     },
