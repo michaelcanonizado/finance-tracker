@@ -26,7 +26,7 @@ const DashboardTable = async ({
     // containerClass are classes applied to the parent/wrapper container of the table: <div><table></table> </div>
     <Table
       containerClass={twMerge(
-        "relative grow max-h-[75vh] overflow-auto max-w-[90vw]",
+        "relative grow max-h-[75vh] overflow-auto max-w-[90vw] border rounded",
         containerClasses,
       )}
       className={twMerge("", className)}
