@@ -34,11 +34,16 @@ const DashboardTable = async ({
       <TableHeader className="sticky top-0  bg-background">
         <TableRow className="">
           {Object.keys(data.values[0]).map((header, index, arr) => {
+            // Base table header class
+            let tableHeaderClasses = "";
+
+            // Last header
+            if (index === arr.length - 1) {
+              tableHeaderClasses += "text-right";
+            }
+
             return (
-              <TableHead
-                key={index}
-                className={`${index === arr.length - 1 ? "text-right" : ""}`}
-              >
+              <TableHead key={index} className={tableHeaderClasses}>
                 {header.toUpperCase()}
               </TableHead>
             );
@@ -51,7 +56,7 @@ const DashboardTable = async ({
             <TableCell className="text-xm text-muted-foreground">
               {row.timestamp}
             </TableCell>
-            <TableCell className="">{row.date}</TableCell>
+            <TableCell className="whitespace-nowrap">{row.date}</TableCell>
             <TableCell>{row.category}</TableCell>
             <TableCell className="">{row.description}</TableCell>
 
@@ -62,7 +67,7 @@ const DashboardTable = async ({
               ""
             )}
 
-            <TableCell className="text-right font-semibold">
+            <TableCell className="whitespace-nowrap text-right font-semibold">
               {row.amount.toFixed(2)} PHP
             </TableCell>
           </TableRow>
