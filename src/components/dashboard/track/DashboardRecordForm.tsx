@@ -38,8 +38,10 @@ import { IncomeCategories, ExpensesCategories, Accounts } from "@/types/main";
 
 const DashboardRecordForm = ({
   variant,
+  onSubmit,
 }: {
   variant: "income" | "expense";
+  onSubmit?: () => {};
 }) => {
   // Change input description based on variants
   const inputDescription =
@@ -76,7 +78,11 @@ const DashboardRecordForm = ({
     date: z.date({
       required_error: "Please enter a valid date.",
     }),
-    category: z.enum(ExpensesCategories),
+    // Conditionally set the different categories.
+    category:
+      variant === "income"
+        ? z.enum(IncomeCategories)
+        : z.enum(ExpensesCategories),
     // Set description to be optional when variant is income (I personally wanted it to be optional).
     description:
       variant === "income"
