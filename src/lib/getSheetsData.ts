@@ -14,12 +14,30 @@ export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
     range: sheetName,
   });
 
-  // Format the values fetched from the sheet
-  const formattedData = formatGoogleSheetData(rows.data.values!, sheetName);
+  if (rows.data.values) {
+    // Format the values fetched from the sheet
+    const formattedData = formatGoogleSheetData(rows.data.values);
 
+    return {
+      sheet: sheetName,
+      values: formattedData.values,
+      total: formattedData.total,
+    } as ICashFlow;
+  }
+
+  // Return if sheet is empty
   return {
     sheet: sheetName,
-    values: formattedData.values,
-    total: formattedData.total,
+    values: [
+      {
+        timestamp: "-",
+        date: "-",
+        amount: 0,
+        category: "-",
+        description: "-",
+        account: "-",
+      },
+    ],
+    total: 1,
   } as ICashFlow;
 };

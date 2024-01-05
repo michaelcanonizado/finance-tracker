@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GoogleSheets, ICashFlow } from "@/types/main";
+import { ICashFlow } from "@/types/main";
 
 import {
   Table,
@@ -59,14 +59,7 @@ const DashboardTable = async ({
             <TableCell className="whitespace-nowrap">{row.date}</TableCell>
             <TableCell>{row.category}</TableCell>
             <TableCell className="">{row.description}</TableCell>
-
-            {/* Render the acoount column if in income page */}
-            {data.sheet === GoogleSheets.income ? (
-              <TableCell className="">{row.account}</TableCell>
-            ) : (
-              ""
-            )}
-
+            <TableCell className="">{row.account}</TableCell>
             <TableCell className="whitespace-nowrap text-right font-semibold">
               {row.amount.toFixed(2)} PHP
             </TableCell>
@@ -76,9 +69,7 @@ const DashboardTable = async ({
 
       <TableFooter className="sticky bottom-0 bg-muted">
         <TableRow>
-          <TableCell colSpan={data.sheet === GoogleSheets.income ? 4 : 3}>
-            Total
-          </TableCell>
+          <TableCell colSpan={4}>Total</TableCell>
           <TableCell className="text-right" colSpan={2}>
             {data.total.toFixed(2)} PHP
           </TableCell>

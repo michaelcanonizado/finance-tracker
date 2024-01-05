@@ -7,7 +7,7 @@ import { ICashFlowDetails, ICashFlow } from "@/types/main";
 // Set values to 'any[]' as googleSheets.spreadsheets.values.append is looking for an array of any
 export const sendCashFlowData = async (sheetName: string, values: any[][]) => {
   const [googleSheets, auth, spreadsheetId] = await authenticateGoogleSheets();
-  console.log(values);
+
   const res = await googleSheets.spreadsheets.values.append({
     auth,
     spreadsheetId,
