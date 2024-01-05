@@ -9,6 +9,7 @@ import {
   ArrowRight,
   ListPlus,
   ListMinus,
+  ArrowRightLeft,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -24,18 +25,18 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
       title: "Main",
       routes: [
         {
-          title: "Payments",
-          href: `/${user}/payments`,
+          title: "Link",
+          href: `/${user}`,
           icon: <ArrowRight className={linkIconClasses} />,
         },
         {
-          title: "Balances",
-          href: `/${user}/balances`,
+          title: "Link",
+          href: `/${user}`,
           icon: <ArrowRight className={linkIconClasses} />,
         },
         {
-          title: "Reports",
-          href: `/${user}/reports`,
+          title: "Link",
+          href: `/${user}`,
           icon: <ArrowRight className={linkIconClasses} />,
         },
       ],
@@ -52,6 +53,11 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
           title: "Expense",
           href: `/${user}/track/expense`,
           icon: <ListMinus className={linkIconClasses} />,
+        },
+        {
+          title: "Transfer",
+          href: `/${user}/track/transfer`,
+          icon: <ArrowRightLeft className={linkIconClasses} />,
         },
       ],
     },
