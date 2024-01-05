@@ -140,7 +140,7 @@ const DashboardRecordForm = ({
                 <Select onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger className="w-full rounded">
-                      <SelectValue placeholder="" />
+                      <SelectValue />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="rounded">
@@ -180,11 +180,11 @@ const DashboardRecordForm = ({
                       <Button
                         variant={"outline"}
                         className={cn(
-                          "xs:pl-3 w-full justify-start pl-2 text-left font-normal sm:pl-4",
+                          "w-full justify-start pl-2 text-left font-normal xs:pl-3 sm:pl-4",
                           !field.value && "text-muted-foreground",
                         )}
                       >
-                        <CalendarIcon className="xs:block mr-2 hidden h-4 w-4" />
+                        <CalendarIcon className="mr-2 hidden h-4 w-4 xs:block" />
                         {field.value ? (
                           format(field.value, "PPP")
                         ) : (
@@ -220,7 +220,7 @@ const DashboardRecordForm = ({
                 <Select onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger className="w-full rounded">
-                      <SelectValue placeholder="" />
+                      <SelectValue />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="rounded">
