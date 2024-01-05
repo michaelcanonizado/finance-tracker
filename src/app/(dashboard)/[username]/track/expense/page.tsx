@@ -9,7 +9,7 @@ const TrackExpense = () => {
         <div className="mb-10">
           <h1 className="text-4xl">Track Expense</h1>
         </div>
-        <DashboardRecordForm variant="expense" />
+        <DashboardRecordForm variant="expenses" />
       </div>
     </div>
   );

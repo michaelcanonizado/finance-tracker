@@ -34,14 +34,18 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-import { IncomeCategories, ExpensesCategories, Accounts } from "@/types/main";
+import {
+  GoogleSheets,
+  IncomeCategories,
+  ExpensesCategories,
+  Accounts,
+  ICashFlow,
+} from "@/types/main";
 
 const DashboardRecordForm = ({
   variant,
-  onSubmit,
 }: {
-  variant: "income" | "expense";
-  onSubmit?: () => {};
+  variant: keyof typeof GoogleSheets;
 }) => {
   // Change input description based on variants
   const inputDescription =
@@ -107,8 +111,50 @@ const DashboardRecordForm = ({
   });
 
   // Handle form submit.
-  function onSubmitFormHandler(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmitFormHandler(values: z.infer<typeof formSchema>) {
+    // Create a new Date object
+    const currentDate = new Date();
+
+    // Extract components of the date to follow the format in google sheets
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const hours = currentDate.getHours();
+    const minutes = currentDate.getMinutes();
+    const seconds = currentDate.getSeconds();
+
+    const transactionYear = values.date.getFullYear().toString().slice(-2);
+    const transactionMonth = (values.date.getMonth() + 1)
+      .toString()
+      .padStart(2, "0");
+    const transactionDay = values.date.getDate().toString().padStart(2, "0");
+    const formattedTransactionDate = `${transactionMonth}/${transactionDay}/${transactionYear}`;
+
+    // Format values to required format, ready to be pushed to google sheets
+    const body: ICashFlow = {
+      sheet: GoogleSheets[variant],
+      values: [
+        {
+          timestamp: `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`,
+          date: formattedTransactionDate,
+          amount: parseFloat(values.amount),
+          category: values.category,
+          description: values.description as string,
+          account: values.account,
+        },
+      ],
+      total: 1,
+    };
+
+    // Send data to API
+    const userID = "123456789";
+    await fetch(`http://localhost:3000/api/${userID}/track`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
   }
 
   return (

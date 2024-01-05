@@ -1,3 +1,5 @@
+"user client";
+
 import React from "react";
 
 import DashboardRecordForm from "@/components/dashboard/track/DashboardRecordForm";
