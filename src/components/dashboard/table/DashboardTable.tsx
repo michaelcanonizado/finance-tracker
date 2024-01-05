@@ -1,6 +1,8 @@
 import React from "react";
 
-import { ICashFlow } from "@/types/main";
+import { GoogleSheets, ICashFlow } from "@/types/main";
+
+import { getData } from "@/lib/getSheetsData";
 
 import {
   Table,
@@ -16,12 +18,26 @@ import { twMerge } from "tailwind-merge";
 const DashboardTable = async ({
   className,
   containerClasses,
-  data,
+  src,
 }: {
   className?: string;
   containerClasses?: string;
-  data: ICashFlow;
+  src: string;
 }) => {
+  let data = null;
+
+  // Check src to determine which sheet to render in table
+  if (src === GoogleSheets.income) {
+    data = (await getData(GoogleSheets.income)) as ICashFlow;
+  } else if (src === GoogleSheets.expenses) {
+    data = (await getData(GoogleSheets.expenses)) as ICashFlow;
+  }
+
+  // Guard clause data to ensure data won't be null
+  if (data === null) {
+    return <></>;
+  }
+
   return (
     // containerClass are classes applied to the parent/wrapper container of the table: <div><table></table> </div>
     <Table
@@ -38,6 +54,11 @@ const DashboardTable = async ({
             let tableHeaderClasses = "";
 
             // Last header
+            if (index === 0) {
+              tableHeaderClasses += "w-[130px]";
+            }
+
+            // Last header
             if (index === arr.length - 1) {
               tableHeaderClasses += "text-right";
             }
@@ -50,6 +71,7 @@ const DashboardTable = async ({
           })}
         </TableRow>
       </TableHeader>
+
       <TableBody className="">
         {data.values.map((row, index) => (
           <TableRow key={index}>

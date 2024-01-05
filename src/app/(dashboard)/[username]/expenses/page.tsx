@@ -1,15 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import DashboardTable from "@/components/dashboard/table/DashboardTable";
+import DashboardTableSkeleton from "@/components/skeletons/DashboardTableSkeleton";
 
 import { GoogleSheets } from "@/types/main";
-import { getData } from "@/lib/getSheetsData";
 
 const Expenses = async () => {
-  const data = await getData(GoogleSheets.expenses);
-
   return (
-    <div className="mx-auto w-fit lg:px-6">
+    <div className="mx-auto w-full lg:px-6">
       <div className="mb-8">
         <div className="mb-1">
           <h1 className="text-4xl">Expenses</h1>
@@ -18,7 +16,9 @@ const Expenses = async () => {
           <p className="text-muted-foreground">List of all expenses</p>
         </div>
       </div>
-      <DashboardTable data={data} />
+      <Suspense fallback={<DashboardTableSkeleton />}>
+        <DashboardTable src={GoogleSheets.expenses} />
+      </Suspense>
     </div>
   );
 };
