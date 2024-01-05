@@ -24,7 +24,6 @@ export const sendCashFlowData = async (sheetName: string, values: any[][]) => {
 };
 
 export async function POST(req: NextRequest) {
-  console.log("DATA RECIEVED...");
   const body = await req.json();
 
   const arrayOfValues = body.values.map((row: ICashFlowDetails) => {
@@ -39,9 +38,6 @@ export async function POST(req: NextRequest) {
   });
 
   const res = await sendCashFlowData(body.sheet, arrayOfValues);
-
-  console.log("DATA SUCCESSFUL SENT...");
-  //   console.log(res);
 
   return new Response("OK");
 }
