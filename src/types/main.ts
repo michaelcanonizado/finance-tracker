@@ -5,13 +5,8 @@ export enum GoogleSheets {
   test = "TEST",
 }
 
-export const Accounts = [
-  "CASH",
-  "GCASH",
-  "PAYMAYA ",
-  "PAYPAL",
-  "BANK",
-] as const;
+export const Wallets = ["CASH", "GCASH", "PAYMAYA ", "PAYPAL", "BANK"] as const;
+
 export const IncomeCategories = [
   "SALARY",
   "ALLOWANCE",
@@ -45,5 +40,5 @@ export interface ICashFlowDetails {
   amount: number;
   category: string;
   description: string;
-  account?: string;
+  wallet: string;
 }

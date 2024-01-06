@@ -26,7 +26,7 @@ const DashboardTableSkeleton = ({
     date: "DATE",
     category: "CATEGORY",
     description: "DESCRIPTION",
-    account: "ACCOUNT",
+    wallet: "WALLET",
     amount: "AMOUNT",
   };
 
@@ -56,7 +56,7 @@ const DashboardTableSkeleton = ({
           </TableHead>
           <TableHead className="min-w-[200px]">{headers.description}</TableHead>
           <TableHead className="w-[110px] min-w-[100px]">
-            {headers.account}
+            {headers.wallet}
           </TableHead>
           <TableHead className="w-[130px] min-w-[100px] text-right">
             {headers.amount}

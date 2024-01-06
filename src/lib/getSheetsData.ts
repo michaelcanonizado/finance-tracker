@@ -35,7 +35,7 @@ export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
         amount: 0,
         category: "-",
         description: "-",
-        account: "-",
+        wallet: "-",
       },
     ],
     total: 1,

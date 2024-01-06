@@ -81,7 +81,7 @@ const DashboardTable = async ({
             <TableCell className="whitespace-nowrap">{row.date}</TableCell>
             <TableCell>{row.category}</TableCell>
             <TableCell className="">{row.description}</TableCell>
-            <TableCell className="">{row.account}</TableCell>
+            <TableCell className="">{row.wallet}</TableCell>
             <TableCell className="whitespace-nowrap text-right font-semibold">
               {row.amount.toFixed(2)} PHP
             </TableCell>

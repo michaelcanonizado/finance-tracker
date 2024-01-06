@@ -2,13 +2,14 @@ import { formatText } from "@/helpers/formatText";
 import { formatDate } from "@/helpers/formatDate";
 
 export const formatGoogleSheetData = (rawData: any[][]) => {
+  console.log(rawData);
+
   rawData.shift();
 
   const formattedData = [];
 
   // Total income/expenses accumulator of the values fetched
   let totalAmount = 0;
-
   // Format array of arrays data into array of objects
   formattedData.push(
     ...rawData.map((row, index) => {
@@ -18,7 +19,7 @@ export const formatGoogleSheetData = (rawData: any[][]) => {
         date: formatDate(row[1]),
         category: formatText(row[3]),
         description: formatText(row[4]),
-        account: formatText(row[5]),
+        wallet: formatText(row[5]),
         amount: parseFloat(row[2]),
       };
     }),

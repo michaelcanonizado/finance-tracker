@@ -38,7 +38,7 @@ import {
   GoogleSheets,
   IncomeCategories,
   ExpensesCategories,
-  Accounts,
+  Wallets,
   ICashFlow,
 } from "@/types/main";
 
@@ -53,7 +53,7 @@ const DashboardRecordForm = ({
       ? {
           // Record income form descriptions
           amount: "Amount to deposit",
-          account: "Account to deposit",
+          account: "Wallet to deposit",
           date: "Date of income",
           category: "Category of income",
           description: "Extra details on income",
@@ -61,7 +61,7 @@ const DashboardRecordForm = ({
       : {
           // Record expense form descriptions
           amount: "Amount to deduct",
-          account: "Account to deduct",
+          account: "Wallet to deduct",
           date: "Date of expense",
           category: "Category of expense",
           description: "Extra details on expense",
@@ -78,7 +78,7 @@ const DashboardRecordForm = ({
       },
       { message: "Please enter a valid amount" },
     ),
-    account: z.enum(Accounts),
+    account: z.enum(Wallets),
     date: z.date({
       required_error: "Please enter a valid date.",
     }),
@@ -140,7 +140,7 @@ const DashboardRecordForm = ({
           amount: parseFloat(values.amount),
           category: values.category,
           description: values.description as string,
-          account: values.account,
+          wallet: values.account,
         },
       ],
       total: 1,
@@ -188,7 +188,7 @@ const DashboardRecordForm = ({
             name="account"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ACCOUNT</FormLabel>
+                <FormLabel>WALLET</FormLabel>
                 <Select onValueChange={field.onChange}>
                   <FormControl>
                     <SelectTrigger className="w-full rounded">
@@ -196,14 +196,14 @@ const DashboardRecordForm = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="rounded">
-                    {Accounts.map((account, index) => {
+                    {Wallets.map((wallet, index) => {
                       return (
                         <SelectItem
-                          value={account}
+                          value={wallet}
                           key={index}
                           className="hover:cursor-pointer"
                         >
-                          {account}
+                          {wallet}
                         </SelectItem>
                       );
                     })}
