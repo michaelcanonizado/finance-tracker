@@ -13,24 +13,16 @@ const incomeLogSchema = new Schema(
       type: Number,
       required: true,
     },
-    wallet: {
+    fromWallet: {
       type: walletSchema,
       required: true,
     },
-    category: {
-      type: categorySchema,
-      retuired: true,
+    toWallet: {
+      type: walletSchema,
+      required: true,
     },
     description: {
       type: String,
-      required: true,
-    },
-    createdAt: {
-      type: Date,
-      required: true,
-    },
-    updatedAt: {
-      type: Date,
       required: true,
     },
   },

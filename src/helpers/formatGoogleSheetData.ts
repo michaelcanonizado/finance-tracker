@@ -2,8 +2,6 @@ import { formatText } from "@/helpers/formatText";
 import { formatDate } from "@/helpers/formatDate";
 
 export const formatGoogleSheetData = (rawData: any[][]) => {
-  console.log(rawData);
-
   rawData.shift();
 
   const formattedData = [];

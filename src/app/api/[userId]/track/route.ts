@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       row.amount,
       row.category,
       row.description,
-      row.account,
+      row.wallet,
     ];
   });
 
