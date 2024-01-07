@@ -2,7 +2,7 @@ import mongoose, { InferSchemaType, Schema, model, models } from "mongoose";
 
 import { categorySchema, walletSchema } from "./user";
 
-const incomeLogSchema = new Schema(
+const expenseLogSchema = new Schema(
   {
     user_id: { type: Schema.Types.ObjectId, ref: "User" },
     date: {
@@ -25,21 +25,13 @@ const incomeLogSchema = new Schema(
       type: String,
       required: true,
     },
-    createdAt: {
-      type: Date,
-      required: true,
-    },
-    updatedAt: {
-      type: Date,
-      required: true,
-    },
   },
   { timestamps: true },
 );
 
-type IncomeLogType = InferSchemaType<typeof incomeLogSchema>;
+type ExpenseLogType = InferSchemaType<typeof expenseLogSchema>;
 
-const IncomeLog =
-  models.IncomeLog || model<IncomeLogType>("IncomeLog", incomeLogSchema);
+const ExpenseLog =
+  models.ExpenseLog || model<ExpenseLogType>("ExpenseLog", expenseLogSchema);
 
-export default IncomeLog;
+export default ExpenseLog;

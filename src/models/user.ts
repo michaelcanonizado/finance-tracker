@@ -1,17 +1,39 @@
 import mongoose, { InferSchemaType, Schema, model, models } from "mongoose";
 
-const categorySchema = new Schema(
+export const categorySchema = new Schema(
   {
     id: Number,
     name: String,
   },
   { _id: false },
 );
-const walletSchema = new Schema(
+export const walletSchema = new Schema(
   {
-    id: Number,
-    name: String,
-    balance: Number,
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false },
+);
+export const userWalletSchema = new Schema(
+  {
+    id: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    balance: {
+      type: Number,
+      required: true,
+    },
   },
   { _id: false },
 );
@@ -27,17 +49,23 @@ const userSchema = new Schema({
   },
   data: {
     categories: {
-      type: [categorySchema],
-      default: [],
+      income: {
+        type: [categorySchema],
+        default: [],
+      },
+      expense: {
+        type: [categorySchema],
+        default: [],
+      },
     },
     wallets: {
-      type: [walletSchema],
+      type: [userWalletSchema],
       default: [],
     },
     logs: {
-      //   transfers: {},
+      transfers: [{ type: Schema.Types.ObjectId, ref: "TransferLog" }],
       incomes: [{ type: Schema.Types.ObjectId, ref: "IncomeLog" }],
-      //   expenses: {},
+      expenses: [{ type: Schema.Types.ObjectId, ref: "ExpenseLog" }],
     },
   },
 });
