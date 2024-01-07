@@ -1,15 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 import { twMerge } from "tailwind-merge";
 
-import { X, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import DashboardSidebar from "../sidebar/DashboardSidebar";
 
 const DashboardNavbar = ({ className }: { className?: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close sidebar drawer everytime user changes routes(clicks on a link)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const toggleSidebar = () => {
     setIsOpen((status) => !status);
