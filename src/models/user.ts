@@ -63,7 +63,7 @@ const userSchema = new Schema({
       default: [],
     },
     logs: {
-      //   transfers: {},
+      transfers: [{ type: Schema.Types.ObjectId, ref: "TransferLog" }],
       incomes: [{ type: Schema.Types.ObjectId, ref: "IncomeLog" }],
       expenses: [{ type: Schema.Types.ObjectId, ref: "ExpenseLog" }],
     },

@@ -1,8 +1,8 @@
 import mongoose, { InferSchemaType, Schema, model, models } from "mongoose";
 
-import { categorySchema, walletSchema } from "./user";
+import { walletSchema } from "./user";
 
-const incomeLogSchema = new Schema(
+const transferLogSchema = new Schema(
   {
     user_id: { type: Schema.Types.ObjectId, ref: "User" },
     date: {
@@ -29,9 +29,10 @@ const incomeLogSchema = new Schema(
   { timestamps: true },
 );
 
-type IncomeLogType = InferSchemaType<typeof incomeLogSchema>;
+type TransferLogType = InferSchemaType<typeof transferLogSchema>;
 
-const IncomeLog =
-  models.IncomeLog || model<IncomeLogType>("IncomeLog", incomeLogSchema);
+const TransferLog =
+  models.TransferLog ||
+  model<TransferLogType>("TransferLog", transferLogSchema);
 
-export default IncomeLog;
+export default TransferLog;
