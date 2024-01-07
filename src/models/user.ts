@@ -49,8 +49,14 @@ const userSchema = new Schema({
   },
   data: {
     categories: {
-      type: [categorySchema],
-      default: [],
+      income: {
+        type: [categorySchema],
+        default: [],
+      },
+      expense: {
+        type: [categorySchema],
+        default: [],
+      },
     },
     wallets: {
       type: [userWalletSchema],

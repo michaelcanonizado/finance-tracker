@@ -6,7 +6,13 @@ import User from "@/models/user";
 import IncomeLog from "@/models/incomeLogs";
 import ExpenseLog from "@/models/expenseLogs";
 
-import { GoogleSheets, ICashFlowDetails } from "@/types/main";
+import {
+  GoogleSheets,
+  ICashFlowDetails,
+  Wallets,
+  IncomeCategories,
+  ExpensesCategories,
+} from "@/types/main";
 
 import { getData } from "@/lib/getSheetsData";
 
@@ -27,26 +33,16 @@ const getWallet = (wallet: string) => {
   };
 };
 const getIncomeCategory = (category: string) => {
-  const categories = ["SALARY", "ALLOWANCE", "INVESTMENT", "BUSINESS", "OTHER"];
-
   return {
-    id: categories.indexOf(category),
+    // @ts-ignore
+    id: IncomeCategories.indexOf(category),
     name: category,
   };
 };
 const getExpenseCategory = (category: string) => {
-  const categories = [
-    "FOOD/DRINK",
-    "TRANSPORTATION",
-    "SHOPPING",
-    "CELLPHONE",
-    "HOUSING",
-    "EDUCATION",
-    "OTHER",
-  ];
-
   return {
-    id: categories.indexOf(category),
+    // @ts-ignore
+    id: ExpensesCategories.indexOf(category),
     name: category,
   };
 };
@@ -64,17 +60,27 @@ export async function GET(req: NextRequest) {
     username: "mikeycanonizado",
     email: "mikey@gmail.com",
     data: {
-      categories: [
-        { id: 1, name: "FOOD" },
-        { id: 2, name: "TRANSPORTATION" },
-        { id: 3, name: "EDUCATION" },
-      ],
-      wallets: [
-        { id: 1, name: "CASH", balance: 0 },
-        { id: 2, name: "BANK", balance: 0 },
-        { id: 3, name: "GCASH", balance: 0 },
-        { id: 4, name: "PAYPAL", balance: 0 },
-      ],
+      categories: {
+        income: IncomeCategories.map((category, index) => {
+          return {
+            id: index,
+            name: category.toUpperCase(),
+          };
+        }),
+        expense: ExpensesCategories.map((category, index) => {
+          return {
+            id: index,
+            name: category.toUpperCase(),
+          };
+        }),
+      },
+      wallets: Wallets.map((wallet, index) => {
+        return {
+          id: index,
+          name: wallet.toUpperCase(),
+          balance: 0,
+        };
+      }),
       logs: {
         incomes: [],
       },
