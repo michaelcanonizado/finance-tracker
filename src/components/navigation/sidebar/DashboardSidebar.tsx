@@ -15,7 +15,13 @@ import {
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const DashboardSidebar = ({ className }: { className?: string }) => {
+const DashboardSidebar = ({
+  className,
+  onClickLink,
+}: {
+  className?: string;
+  onClickLink?: () => void;
+}) => {
   const user = "user";
 
   const linkIconClasses = "mr-2 h-6 w-6";
@@ -101,7 +107,7 @@ const DashboardSidebar = ({ className }: { className?: string }) => {
               </div>{" "}
               {type.routes.map((route, index) => {
                 return (
-                  <Link href={route.href} key={index}>
+                  <Link href={route.href} key={index} onClick={onClickLink}>
                     <Button className="flex w-full justify-start bg-background text-foreground hover:text-background">
                       {/* <LayoutPanelLeft className="mr-2 h-6 w-6" /> */}
                       {route.icon}

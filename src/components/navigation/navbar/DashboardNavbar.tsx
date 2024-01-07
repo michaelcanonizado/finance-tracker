@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { twMerge } from "tailwind-merge";
@@ -14,9 +14,9 @@ const DashboardNavbar = ({ className }: { className?: string }) => {
   const pathname = usePathname();
 
   // Close sidebar drawer everytime user changes routes(clicks on a link)
-  useEffect(() => {
+  const onClickSidebarLink = () => {
     setIsOpen(false);
-  }, [pathname]);
+  };
 
   const toggleSidebar = () => {
     setIsOpen((status) => !status);
@@ -46,6 +46,7 @@ const DashboardNavbar = ({ className }: { className?: string }) => {
             className={`min-w-screen absolute inset-0 z-50 transition-all duration-300 ${
               isOpen ? "translate-x-[0%]" : "translate-x-[-100%]"
             }`}
+            onClickLink={onClickSidebarLink}
           />
           <label
             htmlFor="sidebar-drawer"
