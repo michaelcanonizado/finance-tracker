@@ -15,8 +15,8 @@ function formatIncomeExpenseLogs(rawData: IncomeLogType[] | ExpenseLogType[]) {
     totalAmount += data.amount;
 
     return {
-      timestamp: formatDate(data.createdAt),
-      date: formatDate(data.date),
+      timestamp: formatDate(data.createdAt, "long"),
+      date: formatDate(data.date, "short"),
       amount: data.amount,
       category: data.category,
       description: data.description,
