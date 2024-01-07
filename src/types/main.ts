@@ -1,3 +1,9 @@
+export enum Transactions {
+  income = "income",
+  expense = "expense",
+  transfer = "transfer",
+}
+
 export enum GoogleSheets {
   income = "INCOME DATABASE",
   expenses = "EXPENSES DATABASE",
@@ -29,12 +35,31 @@ export interface IExpenses {
 }
 
 export interface ICashFlow {
-  sheet: GoogleSheets;
+  type: Transactions;
   values: ICashFlowDetails[];
   total: number;
 }
-
 export interface ICashFlowDetails {
+  timestamp: string;
+  date: string;
+  amount: number;
+  category: {
+    id: number;
+    name: string;
+  };
+  description: string;
+  wallet: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface IOldCashFlow {
+  sheet: GoogleSheets;
+  values: IOldCashFlowDetails[];
+  total: number;
+}
+export interface IOldCashFlowDetails {
   timestamp: string;
   date: string;
   amount: number;

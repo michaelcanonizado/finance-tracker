@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import DashboardTable from "@/components/dashboard/table/DashboardTable";
 import DashboardTableSkeleton from "@/components/skeletons/DashboardTableSkeleton";
 
-import { GoogleSheets } from "@/types/main";
+import { Transactions } from "@/types/main";
 
 const Income = async () => {
   return (
@@ -17,7 +17,7 @@ const Income = async () => {
         </div>
       </div>
       <Suspense fallback={<DashboardTableSkeleton />}>
-        <DashboardTable src={GoogleSheets.income} />
+        <DashboardTable src={Transactions.income} />
       </Suspense>
     </div>
   );

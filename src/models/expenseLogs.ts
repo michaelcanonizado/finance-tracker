@@ -29,7 +29,7 @@ const expenseLogSchema = new Schema(
   { timestamps: true },
 );
 
-type ExpenseLogType = InferSchemaType<typeof expenseLogSchema>;
+export type ExpenseLogType = InferSchemaType<typeof expenseLogSchema>;
 
 const ExpenseLog =
   models.ExpenseLog || model<ExpenseLogType>("ExpenseLog", expenseLogSchema);

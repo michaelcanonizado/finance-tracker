@@ -1,9 +1,11 @@
-import { GoogleSheets, ICashFlow } from "@/types/main";
+import { GoogleSheets, IOldCashFlow } from "@/types/main";
 
 import { authenticateGoogleSheets } from "./authenticateGoogleSheets";
 import { formatGoogleSheetData } from "@/helpers/formatGoogleSheetData";
 
-export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
+export const getData = async (
+  sheetName: GoogleSheets,
+): Promise<IOldCashFlow> => {
   // Authenticate google sheets and get instances
   const [googleSheets, auth, spreadsheetId] = await authenticateGoogleSheets();
 
@@ -22,7 +24,7 @@ export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
       sheet: sheetName,
       values: formattedData.values,
       total: formattedData.total,
-    } as ICashFlow;
+    } as IOldCashFlow;
   }
 
   // Return if sheet is empty
@@ -39,5 +41,5 @@ export const getData = async (sheetName: GoogleSheets): Promise<ICashFlow> => {
       },
     ],
     total: 1,
-  } as ICashFlow;
+  } as IOldCashFlow;
 };

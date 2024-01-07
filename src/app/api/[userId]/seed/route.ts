@@ -49,7 +49,7 @@ const getExpenseCategory = (category: string) => {
 
 export async function GET(req: NextRequest) {
   mongoose.connect("mongodb://127.0.0.1:27017/finance-tracker");
-  console.log("connecting...");
+
   // 1) DELETE EXISTING DATA IN COLLECTIONS
   await User.deleteMany({});
   await IncomeLog.deleteMany({});

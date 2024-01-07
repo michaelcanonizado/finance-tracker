@@ -1,4 +1,4 @@
-export const formatDate = (date: string): string => {
+export const formatDate = (date: Date): string => {
   // Formats date from 1/2/2024 to Tues, 1/2/2024
   // options is type asserted as it is throwing an error. More infomartion on: https://stackoverflow.com/questions/73563950/what-exactly-is-the-typescript-linter-asking-for-in-this-case-where-an-object-r
   const dateOptions = {

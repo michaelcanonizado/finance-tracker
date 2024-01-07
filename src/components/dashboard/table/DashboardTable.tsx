@@ -1,8 +1,8 @@
 import React from "react";
 
-import { GoogleSheets, ICashFlow } from "@/types/main";
+import { Transactions, GoogleSheets, ICashFlow } from "@/types/main";
 
-import { getData } from "@/lib/getSheetsData";
+import { getData } from "@/lib/getData";
 
 import {
   Table,
@@ -22,15 +22,15 @@ const DashboardTable = async ({
 }: {
   className?: string;
   containerClasses?: string;
-  src: string;
+  src: Transactions;
 }) => {
   let data = null;
 
   // Check src to determine which sheet to render in table
-  if (src === GoogleSheets.income) {
-    data = (await getData(GoogleSheets.income)) as ICashFlow;
-  } else if (src === GoogleSheets.expenses) {
-    data = (await getData(GoogleSheets.expenses)) as ICashFlow;
+  if (src === Transactions.income) {
+    data = (await getData(Transactions.income)) as ICashFlow;
+  } else if (src === Transactions.expense) {
+    data = (await getData(Transactions.expense)) as ICashFlow;
   }
 
   // Guard clause data to ensure data won't be null
@@ -79,9 +79,9 @@ const DashboardTable = async ({
               {row.timestamp}
             </TableCell>
             <TableCell className="whitespace-nowrap">{row.date}</TableCell>
-            <TableCell>{row.category}</TableCell>
+            <TableCell>{row.category.name}</TableCell>
             <TableCell className="">{row.description}</TableCell>
-            <TableCell className="">{row.wallet}</TableCell>
+            <TableCell className="">{row.wallet.name}</TableCell>
             <TableCell className="whitespace-nowrap text-right font-semibold">
               {row.amount.toFixed(2)} PHP
             </TableCell>

@@ -37,7 +37,7 @@ const incomeLogSchema = new Schema(
   { timestamps: true },
 );
 
-type IncomeLogType = InferSchemaType<typeof incomeLogSchema>;
+export type IncomeLogType = InferSchemaType<typeof incomeLogSchema>;
 
 const IncomeLog =
   models.IncomeLog || model<IncomeLogType>("IncomeLog", incomeLogSchema);

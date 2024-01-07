@@ -29,7 +29,7 @@ const transferLogSchema = new Schema(
   { timestamps: true },
 );
 
-type TransferLogType = InferSchemaType<typeof transferLogSchema>;
+export type TransferLogType = InferSchemaType<typeof transferLogSchema>;
 
 const TransferLog =
   models.TransferLog ||
