@@ -37,15 +37,15 @@ export async function getData(collection: Transactions): Promise<ICashFlow> {
   if (collection === Transactions.income) {
     logs = await IncomeLog.find({
       user_id: userId,
-    });
+    }).sort({ createdAt: -1 });
   } else if (collection === Transactions.expense) {
     logs = await ExpenseLog.find({
       user_id: userId,
-    });
+    }).sort({ createdAt: -1 });
   } else if (collection === Transactions.transfer) {
     logs = await TransferLog.find({
       user_id: userId,
-    });
+    }).sort({ createdAt: -1 });
   }
 
   const formattedlogs = formatIncomeExpenseLogs(logs);

@@ -36,7 +36,7 @@ import { Button } from "@/components/ui/button";
 
 import { Columns4, SlidersHorizontal } from "lucide-react";
 
-const DashboardDropdown = ({ headers }: { headers: [] }) => {
+const DashboardDropdown = ({ headers }: { headers: string[] }) => {
   const operators = ["=", "<", ">"];
 
   function onSubmit() {}
