@@ -14,7 +14,7 @@ export const formatGoogleSheetData = (rawData: any[][]) => {
       totalAmount += parseFloat(row[2]);
       return {
         timestamp: formatText(row[0]),
-        date: formatDate(row[1]),
+        date: formatDate(row[1], "short"),
         category: formatText(row[3]),
         description: formatText(row[4]),
         wallet: formatText(row[5]),

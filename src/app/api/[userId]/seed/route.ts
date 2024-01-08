@@ -7,7 +7,6 @@ import IncomeLog from "@/models/incomeLogs";
 import ExpenseLog from "@/models/expenseLogs";
 
 import {
-  GoogleSheets,
   ICashFlowDetails,
   Wallets,
   IncomeCategories,
@@ -15,6 +14,16 @@ import {
 } from "@/types/main";
 
 import { getData } from "@/lib/getSheetsData";
+import {
+  getIncomeCategory,
+  getExpenseCategory,
+  getWallet,
+} from "@/helpers/getIndex";
+
+enum GoogleSheets {
+  income = "INCOME DATABASE",
+  expenses = "EXPENSES DATABASE",
+}
 
 const getAndFormatGoogleSheetData = async (
   sheet: GoogleSheets,
@@ -22,29 +31,6 @@ const getAndFormatGoogleSheetData = async (
   const rawData = await getData(sheet);
 
   return rawData.values as ICashFlowDetails[];
-};
-
-const getWallet = (wallet: string) => {
-  const wallets = ["CASH", "GCASH", "PAYPAL", "PAYMAYA", "BANK"];
-
-  return {
-    id: wallets.indexOf(wallet),
-    name: wallet,
-  };
-};
-const getIncomeCategory = (category: string) => {
-  return {
-    // @ts-ignore
-    id: IncomeCategories.indexOf(category),
-    name: category,
-  };
-};
-const getExpenseCategory = (category: string) => {
-  return {
-    // @ts-ignore
-    id: ExpensesCategories.indexOf(category),
-    name: category,
-  };
 };
 
 export async function GET(req: NextRequest) {

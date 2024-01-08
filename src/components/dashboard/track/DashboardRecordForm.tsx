@@ -35,17 +35,23 @@ import {
 } from "@/components/ui/popover";
 
 import {
-  GoogleSheets,
+  Transactions,
   IncomeCategories,
   ExpensesCategories,
   Wallets,
   ICashFlow,
 } from "@/types/main";
 
+import {
+  getIncomeCategory,
+  getExpenseCategory,
+  getWallet,
+} from "@/helpers/getIndex";
+
 const DashboardRecordForm = ({
   variant,
 }: {
-  variant: keyof typeof GoogleSheets;
+  variant: keyof typeof Transactions;
 }) => {
   // Change input description based on variants
   const inputDescription =
@@ -53,7 +59,7 @@ const DashboardRecordForm = ({
       ? {
           // Record income form descriptions
           amount: "Amount to deposit",
-          account: "Wallet to deposit",
+          wallet: "Wallet to deposit",
           date: "Date of income",
           category: "Category of income",
           description: "Extra details on income",
@@ -61,7 +67,7 @@ const DashboardRecordForm = ({
       : {
           // Record expense form descriptions
           amount: "Amount to deduct",
-          account: "Wallet to deduct",
+          wallet: "Wallet to deduct",
           date: "Date of expense",
           category: "Category of expense",
           description: "Extra details on expense",
@@ -78,7 +84,7 @@ const DashboardRecordForm = ({
       },
       { message: "Please enter a valid amount" },
     ),
-    account: z.enum(Wallets),
+    wallet: z.enum(Wallets),
     date: z.date({
       required_error: "Please enter a valid date.",
     }),
@@ -112,35 +118,19 @@ const DashboardRecordForm = ({
 
   // Handle form submit.
   async function onSubmitFormHandler(values: z.infer<typeof formSchema>) {
-    // Create a new Date object
-    const currentDate = new Date();
-
-    // Extract components of the date to follow the format in google sheets
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1;
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-
-    const transactionYear = values.date.getFullYear().toString().slice(-2);
-    const transactionMonth = (values.date.getMonth() + 1)
-      .toString()
-      .padStart(2, "0");
-    const transactionDay = values.date.getDate().toString().padStart(2, "0");
-    const formattedTransactionDate = `${transactionMonth}/${transactionDay}/${transactionYear}`;
-
-    // Format values to required format, ready to be pushed to google sheets
     const body: ICashFlow = {
-      sheet: GoogleSheets[variant],
+      type: Transactions[variant],
       values: [
         {
-          timestamp: `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`,
-          date: formattedTransactionDate,
+          timestamp: new Date(),
+          date: values.date,
           amount: parseFloat(values.amount),
-          category: values.category,
+          category:
+            variant === "income"
+              ? getIncomeCategory(values.category)
+              : getExpenseCategory(values.category),
           description: values.description as string,
-          wallet: values.account,
+          wallet: getWallet(values.wallet),
         },
       ],
       total: 1,
@@ -182,10 +172,10 @@ const DashboardRecordForm = ({
             )}
           />
 
-          {/* ACCOUNT */}
+          {/* WALLET */}
           <FormField
             control={form.control}
-            name="account"
+            name="wallet"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>WALLET</FormLabel>
@@ -210,7 +200,7 @@ const DashboardRecordForm = ({
                   </SelectContent>
                 </Select>
                 <FormDescription className="text-xs">
-                  {inputDescription.account}
+                  {inputDescription.wallet}
                 </FormDescription>
                 <FormMessage className="text-xs" />
               </FormItem>

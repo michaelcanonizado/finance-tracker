@@ -4,14 +4,7 @@ export enum Transactions {
   transfer = "transfer",
 }
 
-export enum GoogleSheets {
-  income = "INCOME DATABASE",
-  expenses = "EXPENSES DATABASE",
-  // TEMPORARY TEST SHEET SELECTOR FOR ANY TEST NEEDED WITH DATA
-  test = "TEST",
-}
-
-export const Wallets = ["CASH", "GCASH", "PAYMAYA ", "PAYPAL", "BANK"] as const;
+export const Wallets = ["CASH", "GCASH", "PAYMAYA", "PAYPAL", "BANK"] as const;
 
 export const IncomeCategories = [
   "SALARY",
@@ -30,18 +23,14 @@ export const ExpensesCategories = [
   "OTHER",
 ] as const;
 
-export interface IExpenses {
-  sheet: GoogleSheets;
-}
-
 export interface ICashFlow {
   type: Transactions;
   values: ICashFlowDetails[];
   total: number;
 }
 export interface ICashFlowDetails {
-  timestamp: string;
-  date: string;
+  timestamp: string | Date;
+  date: string | Date;
   amount: number;
   category: {
     id: number;
@@ -52,18 +41,4 @@ export interface ICashFlowDetails {
     id: number;
     name: string;
   };
-}
-
-export interface IOldCashFlow {
-  sheet: GoogleSheets;
-  values: IOldCashFlowDetails[];
-  total: number;
-}
-export interface IOldCashFlowDetails {
-  timestamp: string;
-  date: string;
-  amount: number;
-  category: string;
-  description: string;
-  wallet: string;
 }
