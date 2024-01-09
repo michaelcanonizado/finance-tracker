@@ -1,3 +1,5 @@
+"use server";
+
 import mongoose, { HydratedDocument } from "mongoose";
 
 import IncomeLog, { IncomeLogType } from "@/models/incomeLogs";
@@ -15,6 +17,7 @@ function formatIncomeExpenseLogs(rawData: IncomeLogType[] | ExpenseLogType[]) {
     totalAmount += data.amount;
 
     return {
+      id: data.id,
       timestamp: formatDate(data.createdAt, "long"),
       date: formatDate(data.date, "short"),
       amount: data.amount,

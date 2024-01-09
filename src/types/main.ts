@@ -29,6 +29,7 @@ export interface ICashFlow {
   total: number;
 }
 export interface ICashFlowDetails {
+  id: string;
   timestamp: string | Date;
   date: string | Date;
   amount: number;

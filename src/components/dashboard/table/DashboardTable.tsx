@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/table";
 import { twMerge } from "tailwind-merge";
 import DashboardDropdown from "./DashboardDropdown";
+import { Trash2 } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const DashboardTable = async ({
   className,
@@ -53,9 +55,16 @@ const DashboardTable = async ({
       >
         <TableHeader className="sticky top-0  bg-background">
           <TableRow className="">
+            <TableHead className="hover:cursor-pointer hover:bg-muted">
+              <Trash2 />
+            </TableHead>
             {Object.keys(data.values[0]).map((header, index, arr) => {
               // Base table header class
               let tableHeaderClasses = "";
+
+              if (header === "id") {
+                return;
+              }
 
               // Last header
               if (index === 0) {
