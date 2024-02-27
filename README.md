@@ -1,1 +1,1 @@
-This repository has been renamed and deprecated. A new version will be made.
+🚨 NOTE: This codebase is no longer being maintained and has been archived. A new version will be made.
