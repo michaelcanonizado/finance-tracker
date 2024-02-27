@@ -1,1 +1,1 @@
-This repository has been renamed and deprecated. A new version will be made.
+This repository has been archived. A new version will be made.
